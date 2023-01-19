@@ -8,13 +8,19 @@ function App() {
   const [areas, setAreas] = useState([]);
   const [outcode, setOutcode] = useState("BB10");
   const [outcodeDisplay, setOutcodeDisplay] = useState("BB10");
+  const [cache, setCache] = useState({});
+  console.log('cache: ', cache);
 
   const load = async () => {
     try {
-      const areaData = await getAreaData(outcode);
-
+      let areaData;
+      if (cache[outcode]) {
+        areaData = cache[outcode];
+      } else {
+        areaData = await getAreaData(outcode);
+        setCache({ ...cache, [outcode]: areaData });
+      }
       areas.concat(areaData);
-
       setAreas(areaData);
     } catch (error) {
       window.alert("todo: fix app");
@@ -50,7 +56,7 @@ function App() {
         <input type="submit" value="Submit" aria-label="submit outcode" />
       </form>
       <h2>{`Areas for ${outcodeDisplay}: ${areas.length}`}</h2>
-      <div style={{display: "flex", flexWrap: "wrap", gap: "10px"}}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         {areas.map((area) => {
           return <OutcodeCard area={area} key={area["place name"]} />;
         })}
