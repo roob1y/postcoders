@@ -49,7 +49,7 @@ function App() {
           name="outcode"
           id="outcode"
           onChange={(e) => setOutcode(e.target.value)}
-        ></textarea>{" "}
+        />
         <br />
         <br />
         <input type="submit" value="Submit" aria-label="submit outcode" />
