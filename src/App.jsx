@@ -9,7 +9,6 @@ function App() {
   const [outcode, setOutcode] = useState("BB10");
   const [outcodeDisplay, setOutcodeDisplay] = useState("BB10");
   const [cache, setCache] = useState({});
-  console.log('cache: ', cache);
 
   const load = async () => {
     try {
